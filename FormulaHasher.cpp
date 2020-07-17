@@ -114,10 +114,13 @@ namespace ctl_f {
 
 		// strings with 4 or less characters seem to break the xorFilter so we're going to do a psudo growth before
 		// proceeding with the rest of the algorithm
+		unsigned char modMask = 0b01101001;
 		if(input.length() <= 4){
 			int offset = 0;
 			while(input.length() < 8){
-				input += input[offset++];
+				input += input[offset++] % modMask + offset;
+				modMask <<= 1;
+
 				if(offset >= input.length()){
 					offset = 0;
 				}
