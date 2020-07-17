@@ -1,3 +1,8 @@
+/*
+ * Auther: Ctl-F (Spencer Brough)
+ * Date: 07/15/2020
+ */
+
 #include "FormulaHasher.h"
 #include <iostream>
 #include <fstream>

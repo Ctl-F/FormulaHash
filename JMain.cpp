@@ -1,3 +1,10 @@
+/*
+ * Author: Jaden <lastname>
+ * Date: 07/15/2020
+ * Contributers:
+ * 	Ctl-F (Spencer Brough)
+ */
+
 #include <vector>
 #include <iostream>
 #include <fstream>
@@ -9,7 +16,7 @@
 #include <time.h>
 #include <unordered_set>
 
-#define CLOCK_DELAY_MS 5000
+#define CLOCK_DELAY_MS 2500
 
 using namespace std::chrono;
 inline long currentTime(){
@@ -95,7 +102,7 @@ void  testHashtable(vector<vector<vector<string>>> &hashTable, int values, int m
 		return;
 	}
 
-	long timeStamp = currentTime();
+	long timeStamp = 0;
 
 	for(int i = 0; i < values; i++)
 	{
@@ -111,7 +118,7 @@ void  testHashtable(vector<vector<vector<string>>> &hashTable, int values, int m
 		int indexTwo = 0;
 		
 		if(currentTime() - timeStamp > CLOCK_DELAY_MS){
-			cout << "Done " << i << "/" << values << "\n";
+			cout << "> " << i << "/" << values << " [" << ((double)i / (double)values * 100.0) << "%]\n";
 			timeStamp = currentTime();
 		}
 
@@ -144,6 +151,7 @@ void  testHashtable(vector<vector<vector<string>>> &hashTable, int values, int m
 
 	}
 	collisionReport.close();
+	cout << "\n";
 	cout << "Testing Report: " << endl;
 	cout << "Total collisions: " << collisionCounter << endl;
 }
@@ -151,12 +159,12 @@ void  testHashtable(vector<vector<vector<string>>> &hashTable, int values, int m
 int main()
 {
 	srand(time(NULL));
-	int values = 999999;
+	int values = 99999; //999999;
 	int maxWordLength = 50;
 	int maxSize = 255;
 	vector<vector<vector<string>>> hashTable;
 
-	cout << "Starting Test: ";
+	cout << "Starting Test:\n";
 	long startTime = currentTime();
 
 	testHashtable(hashTable, values, maxWordLength, maxSize);

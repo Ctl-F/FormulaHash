@@ -1,3 +1,8 @@
+/*
+ * Author: Ctl-F (Spencer Brough)
+ * Date: 07/15/2020
+ */
+
 #pragma once
 #include <string>
 
