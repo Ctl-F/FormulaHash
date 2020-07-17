@@ -159,7 +159,12 @@ void  testHashtable(vector<vector<vector<string>>> &hashTable, int values, int m
 int main()
 {
 	srand(time(NULL));
-	int values = 500000; //999999;
+	
+	int values; // = 500000; //999999;
+	cout << "How many tests do you want to run: ";
+	cin >> values;
+	cout << "\n";
+
 	int maxWordLength = 50;
 	int maxSize = 255;
 	vector<vector<vector<string>>> hashTable;

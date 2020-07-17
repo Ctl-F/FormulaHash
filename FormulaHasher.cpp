@@ -112,11 +112,19 @@ namespace ctl_f {
 			return "";
 		}
 
-		// with strings less than 4 characters long this seems to break it
-		// at this stage so just hold off for now
-		if (length >= 4) {
-			input = xorFilter(input);
+		// strings with 4 or less characters seem to break the xorFilter so we're going to do a psudo growth before
+		// proceeding with the rest of the algorithm
+		if(input.length() <= 4){
+			int offset = 0;
+			while(input.length() < 8){
+				input += input[offset++];
+				if(offset >= input.length()){
+					offset = 0;
+				}
+			}
 		}
+		
+		input = xorFilter(input);
 
 		const unsigned char BIT_MASK = 0b00000001;
 		unsigned int currentBit = 0;
