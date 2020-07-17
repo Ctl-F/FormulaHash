@@ -1,5 +1,6 @@
 #include <vector>
 #include <iostream>
+#include <fstream>
 #include <string>
 #include <cstdlib>
 #include <chrono>
@@ -7,6 +8,8 @@
 #include "FormulaHasher.h"
 #include <time.h>
 #include <unordered_set>
+
+#define CLOCK_DELAY_MS 5000
 
 using namespace std::chrono;
 inline long currentTime(){
@@ -84,6 +87,14 @@ void  testHashtable(vector<vector<vector<string>>> &hashTable, int values, int m
 	FormulaHasher hasher;
 	int collisionCounter = 0;
 
+	ofstream collisionReport;
+	collisionReport.open("HashCollisionReport.txt");
+
+	if(!collisionReport.is_open()){
+		cout << "Cannot create report file, aborting\n";
+		return;
+	}
+
 	long timeStamp = currentTime();
 
 	for(int i = 0; i < values; i++)
@@ -99,7 +110,7 @@ void  testHashtable(vector<vector<vector<string>>> &hashTable, int values, int m
 		int indexOne = 0;
 		int indexTwo = 0;
 		
-		if(currentTime() - timeStamp > 2500){
+		if(currentTime() - timeStamp > CLOCK_DELAY_MS){
 			cout << "Done " << i << "/" << values << "\n";
 			timeStamp = currentTime();
 		}
@@ -114,8 +125,11 @@ void  testHashtable(vector<vector<vector<string>>> &hashTable, int values, int m
 		{
 			if(hashTable[indexOne][indexTwo][j] == hash)
 			{
-				cout << "There is a collision between, " << word
-					<< " and " << hashMap[hash] << endl;
+				//cout << "There is a collision between, " << word
+				//	<< " and " << hashMap[hash] << endl;
+				
+				collisionReport << word << "\t" << hashMap[hash] << "\n";
+				
 				collisionCounter++;
 				add = false;	
 			}
@@ -129,6 +143,7 @@ void  testHashtable(vector<vector<vector<string>>> &hashTable, int values, int m
 		}
 
 	}
+	collisionReport.close();
 	cout << "Testing Report: " << endl;
 	cout << "Total collisions: " << collisionCounter << endl;
 }
@@ -136,7 +151,7 @@ void  testHashtable(vector<vector<vector<string>>> &hashTable, int values, int m
 int main()
 {
 	srand(time(NULL));
-	int values = 9999999;
+	int values = 999999;
 	int maxWordLength = 50;
 	int maxSize = 255;
 	vector<vector<vector<string>>> hashTable;
