@@ -165,6 +165,11 @@ int main()
 	cin >> values;
 	cout << "\n";
 
+	if(values < 1){
+		cout << "Zero Tests Ran\n";
+		return 0;
+	}
+
 	int maxWordLength = 50;
 	int maxSize = 255;
 	vector<vector<vector<string>>> hashTable;
