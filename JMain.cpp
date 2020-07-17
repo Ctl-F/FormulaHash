@@ -153,13 +153,13 @@ void  testHashtable(vector<vector<vector<string>>> &hashTable, int values, int m
 	collisionReport.close();
 	cout << "\n";
 	cout << "Testing Report: " << endl;
-	cout << "Total collisions: " << collisionCounter << endl;
+	cout << "Total collisions: " << collisionCounter << " out of " << values << " total tests" << endl;
 }
 
 int main()
 {
 	srand(time(NULL));
-	int values = 99999; //999999;
+	int values = 500000; //999999;
 	int maxWordLength = 50;
 	int maxSize = 255;
 	vector<vector<vector<string>>> hashTable;
@@ -170,7 +170,7 @@ int main()
 	testHashtable(hashTable, values, maxWordLength, maxSize);
 	
 	long endTime = currentTime();
-	cout << "Tested in " << (endTime-startTime) << "(ms)\n";
+	cout << "Tested in ~" << ((endTime-startTime) / 1000) << "(s) (" << (endTime-startTime) << "ms)\n";
 
 	return 0; //#
 }
